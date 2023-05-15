@@ -51,7 +51,9 @@
     "description": "If you see this - you see a bug.",
     "color": "light_green",
     "flags": [ "PSEUDO" ],
-    "pocket_mods": [ { "pocket_type": "MAGAZINE_WELL", "default_magazine": "pseudo_magazine", "item_restriction": [ "pseudo_magazine" ] } ]
+    "pocket_mods": [ 
+      { "pocket_type": "MAGAZINE_WELL", "default_magazine": "pseudo_magazine", "item_restriction": [ "pseudo_magazine" ] } 
+    ]
   },
   {
     "id": "magazine_battery_light_mod",
@@ -63,11 +65,7 @@
     "color": "light_green",
     "acceptable_ammo": [ "battery" ],
     "pocket_mods": [
-      {
-        "pocket_type": "MAGAZINE_WELL",
-        "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
-        "default_magazine": "light_minus_battery_cell"
-      }
+      {"pocket_type": "MAGAZINE_WELL", "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ], "default_magazine": "light_minus_battery_cell"}
     ]
   },
   {
