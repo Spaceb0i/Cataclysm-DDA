@@ -204,7 +204,7 @@ TEST_CASE( "monster_throwing_sanity_test", "[throwing],[balance]" )
     // You got a player
     Character &you = get_player_character();
     clear_avatar();
-    you.dodges_left = 1;
+    you.set_dodges_left( 1 ) ;
     REQUIRE( Approx( you.get_dodge() ) == 4.0 );
     you.setpos( target_location );
     const tripoint_abs_ms abs_target_location = you.get_location();
@@ -230,9 +230,10 @@ TEST_CASE( "monster_throwing_sanity_test", "[throwing],[balance]" )
         epsilon_threshold threshold{ expected_damage, 2.5 };
         do {
             you.set_all_parts_hp_to_max();
+            you.set_stamina( you.get_stamina_max() ); // Resets stamina so dummy can keep dodging
             // Remove stagger/winded effects
             you.clear_effects();
-            you.dodges_left = 1;
+            you.set_dodges_left( 1 );
             int prev_hp = you.get_hp();
             // monster shoots the player
             REQUIRE( attack->call( test_monster ) == true );
@@ -254,7 +255,7 @@ TEST_CASE( "monster_throwing_sanity_test", "[throwing],[balance]" )
     }
 }
 
-TEST_CASE( "Mattack dialog condition test", "[mattack]" )
+TEST_CASE( "Mattack_dialog_condition_test", "[mattack]" )
 {
     clear_map();
     clear_creatures();
@@ -295,7 +296,7 @@ TEST_CASE( "Mattack dialog condition test", "[mattack]" )
     CHECK( !attack->call( test_monster ) );
 }
 
-TEST_CASE( "Targeted grab removal test", "[mattack][grab]" )
+TEST_CASE( "Targeted_grab_removal_test", "[mattack][grab]" )
 {
 
     const std::string grabber_left = "mon_debug_grabber_left";
@@ -336,7 +337,7 @@ TEST_CASE( "Targeted grab removal test", "[mattack][grab]" )
     REQUIRE( !you.has_effect( effect_grabbed, body_part_arm_l ) );
 }
 
-TEST_CASE( "Ranged pull tests", "[mattack][grab]" )
+TEST_CASE( "Ranged_pull_tests", "[mattack][grab]" )
 {
     // Set up further from the target
     const tripoint target_location = attacker_location + tripoint{ 4, 0, 0 };
@@ -411,7 +412,7 @@ TEST_CASE( "Ranged pull tests", "[mattack][grab]" )
 }
 
 
-TEST_CASE( "Grab breaks against weak grabber(s)", "[mattack][grab]" )
+TEST_CASE( "Grab_breaks_against_weak_grabbers", "[mattack][grab]" )
 {
     const tripoint target_location = attacker_location + tripoint_east;
     const tripoint attacker_location_n = target_location + tripoint_north;
@@ -552,7 +553,7 @@ TEST_CASE( "Grab breaks against weak grabber(s)", "[mattack][grab]" )
     }
 }
 
-TEST_CASE( "Grab breaks against midline grabbers", "[mattack][grab]" )
+TEST_CASE( "Grab_breaks_against_midline_grabbers", "[mattack][grab]" )
 {
     const tripoint target_location = attacker_location + tripoint_east;
     const tripoint attacker_location_n = target_location + tripoint_north;
@@ -690,7 +691,7 @@ TEST_CASE( "Grab breaks against midline grabbers", "[mattack][grab]" )
     }
 }
 
-TEST_CASE( "Grab breaks against strong grabbers", "[mattack][grab]" )
+TEST_CASE( "Grab_breaks_against_strong_grabbers", "[mattack][grab]" )
 {
     const tripoint target_location = attacker_location + tripoint_east;
     const tripoint attacker_location_n = target_location + tripoint_north;
